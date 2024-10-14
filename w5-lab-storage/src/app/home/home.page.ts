@@ -3,13 +3,14 @@ import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInpu
 import { FormsModule } from '@angular/forms';
 import { Storage } from '@ionic/storage-angular';
 import { StorageService } from '../storage.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea, FormsModule],
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea, FormsModule, RouterLink],
   providers: [Storage, StorageService]
 })
 export class HomePage {
