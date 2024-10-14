@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea } from '@ionic/angular/standalone';
 import { IonicStorageModule, Storage } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-home',
@@ -9,55 +10,47 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea, IonicStorageModule, FormsModule],
-  providers: [Storage]
+  providers: [Storage, StorageService]
 })
 export class HomePage {
-  private storage = inject(Storage);
   key: string = '';
   value: string = '';
   output: string = '';
 
-  constructor() {}
-
-  async ngOnInit() {
-    await this.storage.create();
-  }
+  constructor(private storageService: StorageService) {}
 
   async setItem() {
-    await this.storage.set(this.key, this.value);
+    await this.storageService.setItem(this.key, this.value);
     this.output = `Set ${this.key}: ${this.value}`;
   }
 
   async getItem() {
-    const value = await this.storage.get(this.key);
+    const value = await this.storageService.getItem(this.key);
     this.output = `Get ${this.key}: ${value}`;
   }
 
   async removeItem() {
-    await this.storage.remove(this.key);
+    await this.storageService.removeItem(this.key);
     this.output = `Removed ${this.key}`;
   }
 
   async clearStorage() {
-    await this.storage.clear();
+    await this.storageService.clearStorage();
     this.output = 'Cleared all items';
   }
 
   async getKeys() {
-    const keys = await this.storage.keys();
+    const keys = await this.storageService.getKeys();
     this.output = `Stored keys: ${keys.join(', ')}`;
   }
 
   async getLength() {
-    const length = await this.storage.length();
+    const length = await this.storageService.getLength();
     this.output = `Number of key/value pairs: ${length}`;
   }
 
   async enumerateItems() {
-    let result = '';
-    await this.storage.forEach((value, key, index) => {
-      result += `Key: ${key}, Value: ${value}, Index: ${index}\n`;
-    });
+    const result = await this.storageService.enumerateItems();
     this.output = result;
   }
 }
