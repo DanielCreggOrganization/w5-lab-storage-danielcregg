@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { inject } from '@angular/core';
-import { StorageService } from './storage.service';
 import { Storage } from '@ionic/storage-angular';
+import { StorageService } from './storage.service';
 
 @Component({
   selector: 'app-root',
