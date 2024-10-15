@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea, IonList, IonIcon, IonCard, IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
-import { Storage } from '@ionic/storage-angular';
 import { StorageService } from '../storage.service';
 import { trashOutline } from 'ionicons/icons';
 
@@ -30,7 +29,6 @@ import { trashOutline } from 'ionicons/icons';
     CommonModule,
     FormsModule
   ],
-  providers: [Storage, StorageService]
 })
 export class MoviesPage implements OnInit {
   private storageService = inject(StorageService);

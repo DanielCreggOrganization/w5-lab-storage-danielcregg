@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
-import { Storage } from '@ionic/storage-angular';
 import { StorageService } from '../storage.service';
 import { RouterLink } from '@angular/router';
 
@@ -11,7 +10,6 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['home.page.scss'],
   standalone: true,
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonInput, IonButton, IonTextarea, FormsModule, RouterLink],
-  providers: [Storage, StorageService]
 })
 export class HomePage {
  // These are the properties that will be bound to the input fields and the output area in the template  
