@@ -6,7 +6,6 @@ import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
 import { Storage } from '@ionic/storage-angular';
-import { StorageService } from './app/storage.service';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -14,6 +13,5 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
     Storage,
-    StorageService
   ],
 });
