@@ -1,49 +1,83 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  private storage = inject(Storage);
-  
-  constructor() {
+  constructor(private storage: Storage) {
     this.init();
   }
 
   async init() {
-    await this.storage.create();
+    try {
+      await this.storage.create();
+    } catch (error) {
+      console.error('Storage initialization error:', error);
+    }
   }
 
   async setItem(key: string, value: any) {
-    await this.storage.set(key, value);
+    try {
+      await this.storage.set(key, value);
+    } catch (error) {
+      console.error(`Error setting item with key ${key}:`, error);
+    }
   }
 
   async getItem(key: string) {
-    return await this.storage.get(key);
+    try {
+      return await this.storage.get(key);
+    } catch (error) {
+      console.error(`Error getting item with key ${key}:`, error);
+      return null;
+    }
   }
 
   async removeItem(key: string) {
-    await this.storage.remove(key);
+    try {
+      await this.storage.remove(key);
+    } catch (error) {
+      console.error(`Error removing item with key ${key}:`, error);
+    }
   }
 
   async clearStorage() {
-    await this.storage.clear();
+    try {
+      await this.storage.clear();
+    } catch (error) {
+      console.error('Error clearing storage:', error);
+    }
   }
 
   async getKeys() {
-    return await this.storage.keys();
+    try {
+      return await this.storage.keys();
+    } catch (error) {
+      console.error('Error getting keys:', error);
+      return [];
+    }
   }
 
   async getLength() {
-    return await this.storage.length();
+    try {
+      return await this.storage.length();
+    } catch (error) {
+      console.error('Error getting storage length:', error);
+      return 0;
+    }
   }
 
   async enumerateItems() {
-    let result = '';
-    await this.storage.forEach((value, key, index) => {
-      result += `Key: ${key}, Value: ${value}, Index: ${index}\n`;
-    });
-    return result;
+    try {
+      let result = '';
+      await this.storage.forEach((value, key, index) => {
+        result += `Key: ${key}, Value: ${value}, Index: ${index}\n`;
+      });
+      return result;
+    } catch (error) {
+      console.error('Error enumerating items:', error);
+      return '';
+    }
   }
 }
